@@ -1,0 +1,158 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=2]
+[ext_resource path="res://Base.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Spawn.tscn" type="PackedScene" id=4]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Base" parent="." instance=ExtResource( 3 )]
+position = Vector2( 512, 568 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 512, 448 )
+
+[node name="Spawns" type="Node2D" parent="."]
+position = Vector2( 512, 448 )
+
+[node name="Spawn" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( -448, -472 )
+
+[node name="Spawn2" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( -384, -472 )
+
+[node name="Spawn3" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( -320, -472 )
+
+[node name="Spawn4" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( -256, -472 )
+
+[node name="Spawn5" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( -192, -472 )
+
+[node name="Spawn6" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( -128, -472 )
+
+[node name="Spawn7" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( -64, -472 )
+
+[node name="Spawn8" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( 0, -472 )
+
+[node name="Spawn9" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( 64, -472 )
+
+[node name="Spawn10" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( 128, -472 )
+
+[node name="Spawn11" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( 192, -472 )
+
+[node name="Spawn12" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( 256, -472 )
+
+[node name="Spawn13" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( 320, -472 )
+
+[node name="Spawn14" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( 384, -472 )
+
+[node name="Spawn15" parent="Spawns" instance=ExtResource( 4 )]
+position = Vector2( 448, -472 )
+
+[node name="TimerSpawn" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="TimerNextWave" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Wave" type="MarginContainer" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/margin_right = 10
+custom_constants/margin_left = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Wave"]
+margin_left = 10.0
+margin_right = 57.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="UI/Wave/HBoxContainer"]
+margin_top = 13.0
+margin_right = 35.0
+margin_bottom = 27.0
+text = "Wave"
+
+[node name="Label2" type="Label" parent="UI/Wave/HBoxContainer"]
+margin_left = 39.0
+margin_top = 13.0
+margin_right = 47.0
+margin_bottom = 27.0
+text = "X"
+
+[node name="GameOver" type="PopupDialog" parent="UI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -80.0
+margin_right = 100.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 200, 100 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Content" type="MarginContainer" parent="UI/GameOver"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver/Content"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 190.0
+margin_bottom = 90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/GameOver/Content/VBoxContainer"]
+margin_right = 180.0
+margin_bottom = 14.0
+text = "Game Over"
+align = 1
+
+[node name="YouSurvived" type="Label" parent="UI/GameOver/Content/VBoxContainer"]
+margin_top = 18.0
+margin_right = 180.0
+margin_bottom = 32.0
+text = "You survived to wave X"
+align = 1
+
+[node name="Spacer" type="Label" parent="UI/GameOver/Content/VBoxContainer"]
+margin_top = 36.0
+margin_right = 180.0
+margin_bottom = 50.0
+align = 1
+
+[node name="Retry" type="Button" parent="UI/GameOver/Content/VBoxContainer"]
+margin_top = 54.0
+margin_right = 180.0
+margin_bottom = 74.0
+text = "Retry"

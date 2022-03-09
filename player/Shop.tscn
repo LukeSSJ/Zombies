@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://player/WeaponButton.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.392157 )
+
+[node name="Shop" type="MarginContainer"]
+margin_right = 300.0
+margin_bottom = 254.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 300.0
+margin_bottom = 328.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Content" type="MarginContainer" parent="."]
+margin_right = 300.0
+margin_bottom = 328.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="Content"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 290.0
+margin_bottom = 318.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="Content/VBox"]
+margin_right = 280.0
+margin_bottom = 14.0
+text = "Shop"
+
+[node name="WeaponButtons" type="VBoxContainer" parent="Content/VBox"]
+margin_top = 24.0
+margin_right = 280.0
+margin_bottom = 308.0
+custom_constants/separation = 10
+
+[node name="Pistol" parent="Content/VBox/WeaponButtons" instance=ExtResource( 2 )]
+margin_bottom = 39.0
+
+[node name="Uzi" parent="Content/VBox/WeaponButtons" instance=ExtResource( 2 )]
+margin_top = 49.0
+margin_bottom = 88.0
+text = "Uzi"
+cost = 200
+
+[node name="Shotgun" parent="Content/VBox/WeaponButtons" instance=ExtResource( 2 )]
+margin_top = 98.0
+margin_bottom = 137.0
+text = "Shotgun"
+cost = 500
+
+[node name="AssaultRifle" parent="Content/VBox/WeaponButtons" instance=ExtResource( 2 )]
+margin_top = 147.0
+margin_bottom = 186.0
+text = "Assault Rifle"
+cost = 800
+
+[node name="MachineGun" parent="Content/VBox/WeaponButtons" instance=ExtResource( 2 )]
+margin_top = 196.0
+margin_bottom = 235.0
+text = "Machine Gun"
+cost = 1400
+
+[node name="RocketLauncher" parent="Content/VBox/WeaponButtons" instance=ExtResource( 2 )]
+margin_top = 245.0
+margin_bottom = 284.0
+text = "Rocket Launcher"
+cost = 2000

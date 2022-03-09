@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://weapon/WeaponBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://weapon/shotgun.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "reload"
+length = 0.4
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reload_done"
+} ]
+}
+
+[node name="Shotgun" instance=ExtResource( 1 )]
+weapon_name = "Shotgun"
+max_ammo = 2
+shotgun = true
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="AP" parent="." index="3"]
+anims/reload = SubResource( 1 )

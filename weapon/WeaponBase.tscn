@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://weapon/WeaponBase.gd" type="Script" id=1]
+[ext_resource path="res://weapon/pistol.png" type="Texture" id=2]
+[ext_resource path="res://bullet/Bullet.tscn" type="PackedScene" id=3]
+
+[node name="WeaponBase" type="Node2D"]
+script = ExtResource( 1 )
+Bullet = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( 0, -16 )
+
+[node name="PointShoot" type="Node2D" parent="."]
+position = Vector2( 32, 0 )
+
+[node name="TimerShoot" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="AP" type="AnimationPlayer" parent="."]
