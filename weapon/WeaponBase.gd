@@ -12,6 +12,7 @@ export (PackedScene) var Bullet
 onready var TimerShoot = $TimerShoot
 onready var PointShoot = $PointShoot
 onready var AP = $AP
+onready var Gunshot = $Gunshot
 
 var ammo
 var can_shoot = true
@@ -47,6 +48,8 @@ func shoot():
 		
 		ammo -= 1
 		update_ammo()
+		
+		Gunshot.play()
 	if ammo == 0:
 		reload()
 
@@ -62,7 +65,7 @@ func can_shoot_again():
 	can_shoot = true
 
 func reload():
-	if AP.current_animation != "reload":
+	if AP.current_animation != "reload" and ammo != max_ammo:
 		AP.play("reload")
 
 func reload_done():

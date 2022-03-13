@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player/UI.gd" type="Script" id=1]
 [ext_resource path="res://player/Shop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/Crosshair.gd" type="Script" id=3]
+[ext_resource path="res://theme/default.tres" type="Theme" id=4]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -83,8 +84,9 @@ __meta__ = {
 [node name="HealthBar" type="ProgressBar" parent="Health"]
 margin_left = 10.0
 margin_right = 110.0
-margin_bottom = 14.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 100, 0 )
+theme = ExtResource( 4 )
 max_value = 200.0
 value = 200.0
 

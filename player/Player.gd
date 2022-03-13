@@ -10,7 +10,7 @@ var dead = false
 var in_shop = false
 var weapon_unlocked = []
 
-var money = 0
+var money = 0 + 10000
 
 onready var Weapons = $Weapons.get_children()
 onready var ActiveWeapon = $Weapons/Uzi
@@ -72,18 +72,18 @@ func add_money(amount):
 func get_hit(other):
 	hp -= other.damage
 	if hp <= 0:
-		dead = true
-		UI.player_dead()
+		lose()
 		emit_signal("dead")
 	UI.update_hp(hp, max_hp)
+
+func lose():
+	dead = true
+	UI.player_dead()
 
 func unlock_weapon(weapon_index, cost):
 	weapon_unlocked[weapon_index] = true
 	money -= cost
 	UI.update_money(money)
-	
-	#in_shop = false
-	#UI.toggle_shop(in_shop)
 	
 	switch_weapon(Weapons[weapon_index])
 

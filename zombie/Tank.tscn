@@ -10,7 +10,8 @@ radius = 24.0
 
 [node name="Tank" instance=ExtResource( 1 )]
 hp = 1000
-WALK_SPEED = 20
+WALK_SPEED = 30
+knockback_mod = 0.2
 damage = 50
 money_gained = 200
 

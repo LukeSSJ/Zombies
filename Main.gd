@@ -61,6 +61,8 @@ func next_wave():
 
 	TimerSpawn.start()
 	TimerSpawn.wait_time = max(0.1, 1 - wave * 0.1)
+	
+	$NextWave.play()
 
 func spawn_zombie():
 	if zombies_to_spawn > 0:
@@ -89,7 +91,7 @@ func game_over():
 	active = false
 	YouSurvived.text = str("You survived to wave " + str(wave))
 	GameOver.show()
-	Global.player.dead = true
+	Global.player.lose()
 
 func retry():
 	get_tree().reload_current_scene()

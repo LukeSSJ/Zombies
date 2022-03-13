@@ -6,6 +6,7 @@
 [node name="ArmouredZombie" instance=ExtResource( 1 )]
 hp = 240
 WALK_SPEED = 60
+knockback_mod = 0.5
 damage = 40
 money_gained = 50
 

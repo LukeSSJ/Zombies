@@ -1,13 +1,13 @@
 extends Area2D
 
 export var BULLET_SPEED = 1200
-export var damage = 40
 export var knockback = 400
 export var free_on_hit = true
 export (PackedScene) var Explosion
 export var buff = false
 
 var vel = Vector2.ZERO
+var damage = 40
 
 func _ready():
 	connect("body_entered", self, "hit_zombie")
