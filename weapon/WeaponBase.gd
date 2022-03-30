@@ -23,6 +23,8 @@ func _ready():
 
 func set_active():
 	update_ammo()
+	if ammo == 0:
+		reload()
 
 func update_ammo():
 	emit_signal("update_ammo", ammo, max_ammo)
@@ -71,3 +73,6 @@ func reload():
 func reload_done():
 	ammo = max_ammo
 	update_ammo()
+
+func stop():
+	AP.stop()

@@ -40,11 +40,13 @@ script = ExtResource( 3 )
 texture = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Weapons" type="Node2D" parent="."]
 
 [node name="Pistol" parent="Weapons" instance=ExtResource( 1 )]
+visible = false
 Bullet = SubResource( 3 )
 
 [node name="Uzi" parent="Weapons" instance=ExtResource( 5 )]

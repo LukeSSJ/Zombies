@@ -3,17 +3,20 @@ extends KinematicBody2D
 signal dead
 
 const WALK_SPEED = 200
+const ROOM_WIDTH = 1024
+const ROOM_HEIGHT = 600
 
 var max_hp = 200
 var hp = max_hp
 var dead = false
 var in_shop = false
+var weapon_selected = 0
 var weapon_unlocked = []
 
 var money = 0 + 10000
 
 onready var Weapons = $Weapons.get_children()
-onready var ActiveWeapon = $Weapons/Uzi
+onready var ActiveWeapon = Weapons[weapon_selected]
 onready var UI = $UI
 
 # Called when the node enters the scene tree for the first time.
@@ -26,8 +29,7 @@ func _ready():
 		weapon_unlocked.append(false)
 	weapon_unlocked[0] = true
 	
-	ActiveWeapon = Weapons[0]
-	switch_weapon(ActiveWeapon)
+	switch_weapon(0)
 	
 	UI.update_money(money)
 
@@ -43,6 +45,8 @@ func _process(_delta):
 	
 	var vel = WALK_SPEED * Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	vel = move_and_slide(vel)
+	position.x = clamp(position.x, 0, ROOM_WIDTH)
+	position.y = clamp(position.y, 0, ROOM_HEIGHT)
 	
 	var mouse_pos = get_global_mouse_position()
 	look_at(mouse_pos)
@@ -56,14 +60,27 @@ func _process(_delta):
 	
 	for i in range(0, 6):
 		if Input.is_action_just_pressed("weapon" + str(i + 1)) and weapon_unlocked[i]:
-			switch_weapon(Weapons[i])
+			switch_weapon(i)
+	if Input.is_action_just_released("weapon_prev"):
+		scroll_weapon(-1)
+	elif Input.is_action_just_released("weapon_next"):
+		scroll_weapon(1)
 
-func switch_weapon(Weapon):
+func switch_weapon(index):
 	ActiveWeapon.hide()
-	ActiveWeapon = Weapon
+	weapon_selected = index
+	ActiveWeapon = Weapons[weapon_selected]
 	UI.update_weapon(ActiveWeapon.weapon_name)
 	ActiveWeapon.set_active()
 	ActiveWeapon.show()
+
+func scroll_weapon(add):
+	var index = weapon_selected + add
+	while index >= 0 and index < 6:
+		if weapon_unlocked[index]:
+			switch_weapon(index)
+			return
+		index += add
 
 func add_money(amount):
 	money += amount
@@ -79,13 +96,13 @@ func get_hit(other):
 func lose():
 	dead = true
 	UI.player_dead()
+	ActiveWeapon.stop()
 
 func unlock_weapon(weapon_index, cost):
 	weapon_unlocked[weapon_index] = true
 	money -= cost
 	UI.update_money(money)
-	
-	switch_weapon(Weapons[weapon_index])
+	switch_weapon(weapon_index)
 
 func heal():
 	hp = max_hp

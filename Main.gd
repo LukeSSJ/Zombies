@@ -38,7 +38,7 @@ func _ready():
 	
 	randomize()
 	next_wave()
-	
+
 func next_wave():
 	if not active:
 		return
@@ -55,8 +55,6 @@ func next_wave():
 		zombie_type_left[3] = wave
 	if wave >= 5:
 		zombie_type_left[4] = ceil(wave / 5)
-	
-	var wave_name = "wave" + str(wave)
 	WaveNumber.text = str(wave)
 
 	TimerSpawn.start()

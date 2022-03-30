@@ -1,13 +1,29 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://weapon/WeaponBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://weapon/assault_rifle.png" type="Texture" id=2]
 [ext_resource path="res://sfx/reload1.wav" type="AudioStream" id=3]
 [ext_resource path="res://sfx/reload3.wav" type="AudioStream" id=4]
+[ext_resource path="res://sfx/reload2.wav" type="AudioStream" id=5]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "reload"
-length = 1.6
+length = 2.0
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -15,7 +31,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 1.6 ),
+"times": PoolRealArray( 1.5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -36,9 +52,25 @@ tracks/1/keys = {
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
+"stream": ExtResource( 5 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
 "stream": ExtResource( 4 )
 } ],
-"times": PoolRealArray( 0, 1.3 )
+"times": PoolRealArray( 0.3, 1, 1.3 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.1, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 1, 0 ]
 }
 
 [node name="AssaultRifle" instance=ExtResource( 1 )]
@@ -49,9 +81,17 @@ damage = 60
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
+hframes = 4
+
+[node name="PointShoot" parent="." index="1"]
+position = Vector2( 46, 5.5 )
 
 [node name="TimerShoot" parent="." index="2"]
 wait_time = 0.12
 
 [node name="AP" parent="." index="3"]
+anims/RESET = SubResource( 2 )
 anims/reload = SubResource( 1 )
+
+[node name="Reload" parent="." index="5"]
+stream = ExtResource( 4 )
