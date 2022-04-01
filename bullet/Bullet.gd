@@ -7,7 +7,7 @@ export (PackedScene) var Explosion
 export var buff = false
 
 var vel = Vector2.ZERO
-var damage = 40
+export var damage = 40
 
 func _ready():
 	connect("body_entered", self, "hit_zombie")

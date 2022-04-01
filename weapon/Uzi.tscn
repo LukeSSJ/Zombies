@@ -23,7 +23,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=1]
 resource_name = "reload"
-length = 1.2
+length = 1.4
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -83,12 +83,15 @@ damage = 30
 texture = ExtResource( 2 )
 hframes = 3
 
-[node name="TimerShoot" parent="." index="2"]
+[node name="MuzzleFlash" parent="." index="1"]
+position = Vector2( 64, 0 )
+
+[node name="TimerShoot" parent="." index="3"]
 wait_time = 0.08
 
-[node name="AP" parent="." index="3"]
+[node name="AP" parent="." index="5"]
 anims/RESET = SubResource( 2 )
 anims/reload = SubResource( 1 )
 
-[node name="Reload" parent="." index="5"]
+[node name="Reload" parent="." index="7"]
 stream = ExtResource( 4 )

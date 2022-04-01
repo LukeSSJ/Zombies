@@ -83,15 +83,18 @@ damage = 60
 texture = ExtResource( 2 )
 hframes = 4
 
-[node name="PointShoot" parent="." index="1"]
+[node name="MuzzleFlash" parent="." index="1"]
+position = Vector2( 66, 6 )
+
+[node name="PointShoot" parent="." index="2"]
 position = Vector2( 46, 5.5 )
 
-[node name="TimerShoot" parent="." index="2"]
+[node name="TimerShoot" parent="." index="3"]
 wait_time = 0.12
 
-[node name="AP" parent="." index="3"]
+[node name="AP" parent="." index="5"]
 anims/RESET = SubResource( 2 )
 anims/reload = SubResource( 1 )
 
-[node name="Reload" parent="." index="5"]
+[node name="Reload" parent="." index="7"]
 stream = ExtResource( 4 )

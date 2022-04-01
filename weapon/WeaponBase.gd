@@ -9,8 +9,10 @@ export var damage = 40
 export var shotgun = false
 export (PackedScene) var Bullet
 
-onready var TimerShoot = $TimerShoot
+onready var MuzzleFlash = $MuzzleFlash
 onready var PointShoot = $PointShoot
+onready var TimerShoot = $TimerShoot
+onready var TimerFlash = $TimerFlash
 onready var AP = $AP
 onready var Gunshot = $Gunshot
 
@@ -20,6 +22,7 @@ var can_shoot = true
 func _ready():
 	TimerShoot.connect("timeout", self, "can_shoot_again")
 	ammo = max_ammo
+	MuzzleFlash.hide()
 
 func set_active():
 	update_ammo()
@@ -51,6 +54,9 @@ func shoot():
 		ammo -= 1
 		update_ammo()
 		
+		MuzzleFlash.show()
+		TimerFlash.start()
+		
 		Gunshot.play()
 	if ammo == 0:
 		reload()
@@ -68,11 +74,17 @@ func can_shoot_again():
 
 func reload():
 	if AP.current_animation != "reload" and ammo != max_ammo:
+		can_shoot = false
+		TimerShoot.stop()
 		AP.play("reload")
 
 func reload_done():
+	can_shoot = true
 	ammo = max_ammo
 	update_ammo()
 
 func stop():
 	AP.stop()
+
+func flash_stop():
+	MuzzleFlash.hide()

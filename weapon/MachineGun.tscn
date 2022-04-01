@@ -83,9 +83,12 @@ damage = 50
 texture = ExtResource( 2 )
 hframes = 5
 
-[node name="AP" parent="." index="3"]
+[node name="MuzzleFlash" parent="." index="1"]
+position = Vector2( 74, 1 )
+
+[node name="AP" parent="." index="5"]
 anims/RESET = SubResource( 2 )
 anims/reload = SubResource( 1 )
 
-[node name="Reload" parent="." index="5"]
+[node name="Reload" parent="." index="7"]
 stream = ExtResource( 4 )

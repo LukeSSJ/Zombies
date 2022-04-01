@@ -17,6 +17,7 @@ onready var WaveNumber = $UI/Wave/HBoxContainer/Label2
 onready var GameOver = $UI/GameOver
 onready var YouSurvived = $UI/GameOver/Content/VBoxContainer/YouSurvived
 onready var Retry = $UI/GameOver/Content/VBoxContainer/Retry
+onready var AP = $AP
 
 var wave = 0
 var active = true
@@ -60,6 +61,7 @@ func next_wave():
 	TimerSpawn.start()
 	TimerSpawn.wait_time = max(0.1, 1 - wave * 0.1)
 	
+	$AP.play("next_wave")
 	$NextWave.play()
 
 func spawn_zombie():
