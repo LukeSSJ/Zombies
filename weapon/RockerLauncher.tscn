@@ -65,7 +65,7 @@ tracks/2/keys = {
 "values": [ 1, 2, 3, 4, 0 ]
 }
 
-[node name="RockerLauncher" instance=ExtResource( 1 )]
+[node name="RocketLauncher" instance=ExtResource( 1 )]
 weapon_name = "Rocket Launcher"
 max_ammo = 1
 damage = 50

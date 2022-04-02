@@ -16,10 +16,12 @@ onready var Wave = $UI/Wave
 onready var WaveNumber = $UI/Wave/HBoxContainer/Label2
 onready var GameOver = $UI/GameOver
 onready var YouSurvived = $UI/GameOver/Content/VBoxContainer/YouSurvived
+onready var TotalKills = $UI/GameOver/Content/VBoxContainer/TotalKills
 onready var Retry = $UI/GameOver/Content/VBoxContainer/Retry
 onready var AP = $AP
 
 var wave = 0
+var kills = 0
 var active = true
 var zombies_to_spawn = 0
 var zombies_left = 0
@@ -30,6 +32,7 @@ func _ready():
 	Global.root = self
 	Global.player = $Player
 	Global.base = $Base
+	Global.can_pause = true
 	
 	Global.player.connect("dead", self, "game_over")
 	Global.base.connect("dead", self, "game_over")
@@ -77,6 +80,7 @@ func get_zombie_type():
 	return ZombieTypes[0][0]
 
 func zombie_killed(zombie):
+	kills += 1
 	Global.player.add_money(zombie.money_gained)
 	zombies_left -= 1
 	if zombies_left == 0:
@@ -88,8 +92,10 @@ func game_over():
 	if not active:
 		return
 	
+	Global.can_pause = false
 	active = false
-	YouSurvived.text = str("You survived to wave " + str(wave))
+	YouSurvived.text = "You survived to wave " + str(wave)
+	TotalKills.text = "Total Kills: " + str(kills)
 	GameOver.show()
 	Global.player.lose()
 

@@ -4,6 +4,8 @@ var root
 var player
 var base
 
+var can_pause = false
+
 onready var Paused = $Paused
 
 func _ready():
@@ -11,7 +13,7 @@ func _ready():
 	Paused.hide()
 
 func _unhandled_key_input(event):
-	if event.pressed:
+	if event.pressed and can_pause:
 		if event.scancode == KEY_ESCAPE:
 			var paused = not get_tree().paused
 			get_tree().paused = paused

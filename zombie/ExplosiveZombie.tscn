@@ -6,6 +6,7 @@
 
 [node name="ExplosiveZombie" instance=ExtResource( 1 )]
 WALK_SPEED = 100
+money_gained = 30
 Explosion = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]

@@ -10,7 +10,7 @@ radius = 14.0
 hp = 80
 WALK_SPEED = 140
 damage = 20
-money_gained = 40
+money_gained = 30
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

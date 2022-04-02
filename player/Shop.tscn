@@ -61,22 +61,22 @@ cost = 200
 margin_top = 104.0
 margin_bottom = 146.0
 text = "Shotgun"
-cost = 500
+cost = 800
 
 [node name="AssaultRifle" parent="Content/VBox/WeaponButtons" instance=ExtResource( 2 )]
 margin_top = 156.0
 margin_bottom = 198.0
 text = "Assault Rifle"
-cost = 800
+cost = 1200
 
 [node name="MachineGun" parent="Content/VBox/WeaponButtons" instance=ExtResource( 2 )]
 margin_top = 208.0
 margin_bottom = 250.0
 text = "Machine Gun"
-cost = 1400
+cost = 2000
 
 [node name="RocketLauncher" parent="Content/VBox/WeaponButtons" instance=ExtResource( 2 )]
 margin_top = 260.0
 margin_bottom = 302.0
 text = "Rocket Launcher"
-cost = 2000
+cost = 4000

@@ -5,6 +5,7 @@
 [ext_resource path="res://bullet/BuffExplosion.tscn" type="PackedScene" id=3]
 
 [node name="BufferZombie" instance=ExtResource( 1 )]
+money_gained = 40
 Explosion = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]

@@ -18,6 +18,7 @@ onready var Gunshot = $Gunshot
 
 var ammo
 var can_shoot = true
+var reloading = false
 
 func _ready():
 	TimerShoot.connect("timeout", self, "can_shoot_again")
@@ -73,13 +74,16 @@ func can_shoot_again():
 	can_shoot = true
 
 func reload():
-	if AP.current_animation != "reload" and ammo != max_ammo:
+	if not reloading and ammo != max_ammo:
 		can_shoot = false
+		reloading = true
 		TimerShoot.stop()
+		AP.stop()
 		AP.play("reload")
 
 func reload_done():
 	can_shoot = true
+	reloading = false
 	ammo = max_ammo
 	update_ammo()
 

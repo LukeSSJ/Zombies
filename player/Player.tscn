@@ -55,7 +55,6 @@ Bullet = SubResource( 3 )
 
 [node name="Shotgun" parent="Weapons" instance=ExtResource( 11 )]
 visible = false
-Bullet = SubResource( 3 )
 
 [node name="AssaultRifle" parent="Weapons" instance=ExtResource( 8 )]
 visible = false

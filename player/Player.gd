@@ -13,7 +13,7 @@ var in_shop = false
 var weapon_selected = 0
 var weapon_unlocked = []
 
-var money = 0 + 10000
+var money = 0
 
 onready var Weapons = $Weapons.get_children()
 onready var ActiveWeapon = Weapons[weapon_selected]
