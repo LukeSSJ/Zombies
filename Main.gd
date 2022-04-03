@@ -41,7 +41,7 @@ func _ready():
 	Retry.connect("pressed", self, "retry")
 	
 	randomize()
-	next_wave()
+	TimerNextWave.start(1)
 
 func next_wave():
 	if not active:
@@ -84,7 +84,7 @@ func zombie_killed(zombie):
 	Global.player.add_money(zombie.money_gained)
 	zombies_left -= 1
 	if zombies_left == 0:
-		TimerNextWave.start()
+		TimerNextWave.start(3)
 		Global.player.heal()
 		Global.base.heal()
 
