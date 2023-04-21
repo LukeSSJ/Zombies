@@ -1,18 +1,18 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 signal zombie_killed
 
-export var hp = 100
-export var WALK_SPEED = 80
-export var knockback_mod = 1.0
-export var damage = 30
-export var money_gained = 20
-export (PackedScene) var Explosion
+@export var hp = 100
+@export var WALK_SPEED = 80
+@export var knockback_mod = 1.0
+@export var damage = 30
+@export var money_gained = 20
+@export var Explosion: PackedScene
 
-onready var MaterialBuff = preload("res://zombie/MaterialBuff.tres")
-onready var Blood = preload("res://zombie/Blood.tscn")
+@onready var MaterialBuff = preload("res://zombie/MaterialBuff.tres")
+@onready var Blood = preload("res://zombie/Blood.tscn")
 
-onready var AttackCol = $HitArea/CollisionShape2D
+@onready var AttackCol = $HitArea/CollisionShape2D
 
 var dead = false
 var target = Global.player
@@ -21,17 +21,18 @@ var knockback_vel = Vector2.ZERO
 var buffed = false
 
 func _ready():
-	connect("zombie_killed", Global.root, "zombie_killed")
+	connect("zombie_killed", Callable(Global.root, "zombie_killed"))
 	
-	$HitArea.connect("body_entered", self, "attack")
-	$TimerTarget.connect("timeout", self, "find_target")
-	$TimerAttackReset.connect("timeout", self, "attack_reset")
+	$HitArea.connect("body_entered", Callable(self, "attack"))
+	$TimerTarget.connect("timeout", Callable(self, "find_target"))
+	$TimerAttackReset.connect("timeout", Callable(self, "attack_reset"))
 
 func _process(_delta):
 	if not dead:
 		look_at(target.position)
-		move_and_slide(Vector2(WALK_SPEED, 0).rotated(rotation) + knockback_vel)
-		knockback_vel = knockback_vel.linear_interpolate(Vector2.ZERO, 0.2)
+		set_velocity(Vector2(WALK_SPEED, 0).rotated(rotation) + knockback_vel)
+		move_and_slide()
+		knockback_vel = knockback_vel.lerp(Vector2.ZERO, 0.2)
 
 func find_target():
 	if position.distance_squared_to(Global.base.position) < position.distance_squared_to(Global.player.position):
@@ -54,7 +55,7 @@ func get_hit(other):
 	knockback_vel = Vector2(other.knockback, 0).rotated(other.rotation)
 	knockback_vel *= knockback_mod
 	
-	var blood = Blood.instance()
+	var blood = Blood.instantiate()
 	blood.position = global_position
 	blood.rotation = rotation
 	get_parent().add_child(blood)
@@ -69,8 +70,8 @@ func get_hit(other):
 		$TimerAttackReset.stop()
 		$TimerDelete.start()
 		
-		$Sprite.modulate.a = 0.5
-		$Sprite.material = null
+		$Sprite2D.modulate.a = 0.5
+		$Sprite2D.material = null
 		
 		$Splat.play()
 		
@@ -83,9 +84,9 @@ func get_hit(other):
 		buffed = true
 		WALK_SPEED *= 1.5
 		damage *= 1.5
-		$Sprite.material = MaterialBuff
+		$Sprite2D.material = MaterialBuff
 
 func create_explosion():
-	var explosion = Explosion.instance()
+	var explosion = Explosion.instantiate()
 	explosion.position = global_position
 	get_parent().add_child(explosion)

@@ -2,21 +2,21 @@ extends CanvasLayer
 
 signal unlock_weapon
 
-onready var Crosshair = $Crosshair
-onready var Ammo = $Ammo/HBoxContainer/Label
-onready var MaxAmmo = $Ammo/HBoxContainer/Label3
-onready var WeaponName = $Weapon/Label
-onready var HealthBar = $Health/HealthBar
-onready var MoneyAmount = $Money/Label
-onready var Shop = $Shop
-onready var WeaponButtons = $Shop/Content/VBox/WeaponButtons
+@onready var Crosshair = $Crosshair
+@onready var Ammo = $Ammo/HBoxContainer/Label
+@onready var MaxAmmo = $Ammo/HBoxContainer/Label3
+@onready var WeaponName = $Weapon/Label
+@onready var HealthBar = $Health/HealthBar
+@onready var MoneyAmount = $Money/Label
+@onready var Shop = $Shop
+@onready var WeaponButtons = $Shop/Content/VBox/WeaponButtons
 
 var player_money = 0
 
 func _ready():
 	for i in WeaponButtons.get_child_count():
 		var WeaponButton = WeaponButtons.get_child(i)
-		WeaponButton.connect("pressed", self, "purchase_weapon", [i, WeaponButton])
+		WeaponButton.connect("pressed", Callable(self, "purchase_weapon").bind(i, WeaponButton))
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	Shop.hide()
 

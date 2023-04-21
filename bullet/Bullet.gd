@@ -1,16 +1,16 @@
 extends Area2D
 
-export var BULLET_SPEED = 1200
-export var knockback = 400
-export var free_on_hit = true
-export (PackedScene) var Explosion
-export var buff = false
+@export var BULLET_SPEED = 1200
+@export var knockback = 400
+@export var free_on_hit = true
+@export var Explosion: PackedScene
+@export var buff = false
 
 var vel = Vector2.ZERO
-export var damage = 40
+@export var damage = 40
 
 func _ready():
-	connect("body_entered", self, "hit_zombie")
+	connect("body_entered", Callable(self, "hit_zombie"))
 	vel = Vector2(BULLET_SPEED, 0).rotated(rotation)
 
 func _process(delta):
@@ -28,6 +28,6 @@ func hit_zombie(zombie):
 		call_deferred("create_explosion")
 
 func create_explosion():
-	var explosion = Explosion.instance()
+	var explosion = Explosion.instantiate()
 	explosion.position = global_position
 	get_parent().add_child(explosion)

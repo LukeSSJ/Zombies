@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/reload3.wav-03be055f66ff4f33e2d57e1d2307f5e4.sample"
+type="AudioStreamWAV"
+uid="uid://crev365y5h03h"
+path="res://.godot/imported/reload3.wav-03be055f66ff4f33e2d57e1d2307f5e4.sample"
 
 [deps]
 
 source_file="res://sfx/reload3.wav"
-dest_files=[ "res://.import/reload3.wav-03be055f66ff4f33e2d57e1d2307f5e4.sample" ]
+dest_files=["res://.godot/imported/reload3.wav-03be055f66ff4f33e2d57e1d2307f5e4.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

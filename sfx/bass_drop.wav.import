@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/bass_drop.wav-da8590ba9ebf6edc4c0f78b46b1ca0e5.sample"
+type="AudioStreamWAV"
+uid="uid://b3iqni4nr3a8u"
+path="res://.godot/imported/bass_drop.wav-da8590ba9ebf6edc4c0f78b46b1ca0e5.sample"
 
 [deps]
 
 source_file="res://sfx/bass_drop.wav"
-dest_files=[ "res://.import/bass_drop.wav-da8590ba9ebf6edc4c0f78b46b1ca0e5.sample" ]
+dest_files=["res://.godot/imported/bass_drop.wav-da8590ba9ebf6edc4c0f78b46b1ca0e5.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

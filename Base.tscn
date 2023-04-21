@@ -1,38 +1,36 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cdoipsqrmx5nb"]
 
-[ext_resource path="res://base.png" type="Texture" id=1]
-[ext_resource path="res://Base.gd" type="Script" id=2]
-[ext_resource path="res://theme/default.tres" type="Theme" id=3]
+[ext_resource type="Texture2D" uid="uid://dvfy8elh2fm5n" path="res://base.png" id="1"]
+[ext_resource type="Script" path="res://Base.gd" id="2"]
+[ext_resource type="Theme" uid="uid://dvdaurfmeavci" path="res://theme/default.tres" id="3"]
 
 [node name="Base" type="StaticBody2D"]
 collision_layer = 7
-script = ExtResource( 2 )
+script = ExtResource("2")
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -32, 0 )
-texture = ExtResource( 1 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-32, 0)
+texture = ExtResource("1")
 
-[node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( 32, 0 )
-texture = ExtResource( 1 )
+[node name="Sprite2" type="Sprite2D" parent="."]
+position = Vector2(32, 0)
+texture = ExtResource("1")
 flip_h = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( 0, 8 )
-polygon = PoolVector2Array( -72, 32, -72, -16, -48, -40, 48, -40, 72, -16, 72, 32 )
+position = Vector2(0, 8)
+polygon = PackedVector2Array(-72, 32, -72, -16, -48, -40, 48, -40, 72, -16, 72, 32)
 
 [node name="HealthBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(80, 20)
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -40.0
-margin_top = -8.0
-margin_right = 40.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 80, 20 )
-theme = ExtResource( 3 )
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 12.0
+theme = ExtResource("3")
+show_percentage = false

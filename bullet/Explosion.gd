@@ -1,10 +1,11 @@
 extends "res://bullet/Bullet.gd"
 
-export var explosion_color = Color.white
+@export var explosion_color = Color.WHITE
 
-onready var radius = $CollisionShape2D.shape.radius
+@onready var radius = $CollisionShape2D.shape.radius
 
 func _ready():
+	super()
 	$Explosion.play()
 
 func _draw():

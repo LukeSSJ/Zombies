@@ -7,23 +7,23 @@ var base
 var can_pause = false
 var pause_from_esc = false
 
-onready var Paused = $Paused
+@onready var Paused = $Paused
 
 func _ready():
-	pause_mode = Node.PAUSE_MODE_PROCESS
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	Paused.hide()
 
 func _unhandled_key_input(event):
 	if event.pressed and can_pause:
-		if event.scancode == KEY_ESCAPE:
+		if event.keycode == KEY_ESCAPE:
 			toggle_pause()
-		elif event.scancode == KEY_F4:
-			OS.window_fullscreen = not OS.window_fullscreen
+		elif event.keycode == KEY_F4:
+			get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (not ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED
 
 func _notification(what):
-	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT:
 		pause()
-	elif what == MainLoop.NOTIFICATION_WM_FOCUS_IN:
+	elif what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
 		if not pause_from_esc:
 			unpause()
 

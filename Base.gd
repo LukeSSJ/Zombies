@@ -5,7 +5,7 @@ signal dead
 var max_hp = 1000
 var hp = max_hp
 
-onready var HealthBar = $HealthBar
+@onready var HealthBar = $HealthBar
 
 func _ready():
 	HealthBar.max_value = max_hp

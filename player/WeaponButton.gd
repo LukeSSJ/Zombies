@@ -1,6 +1,6 @@
 extends Button
 
-export var cost = 0
+@export var cost = 0
 
 func _ready():
 	if cost > 0:

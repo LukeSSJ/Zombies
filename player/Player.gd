@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 signal dead
 
@@ -8,23 +8,23 @@ const ROOM_HEIGHT = 600
 
 var max_hp = 200
 var hp = max_hp
-var dead = false
+var is_dead = false
 var in_shop = false
 var weapon_selected = 0
 var weapon_unlocked = []
 
 var money = 0
 
-onready var Weapons = $Weapons.get_children()
-onready var ActiveWeapon = Weapons[weapon_selected]
-onready var UI = $UI
+@onready var Weapons = $Weapons.get_children()
+@onready var ActiveWeapon = Weapons[weapon_selected]
+@onready var UI = $UI
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	UI.connect("unlock_weapon", self, "unlock_weapon")
+	UI.connect("unlock_weapon", Callable(self, "unlock_weapon"))
 	
 	for weapon in Weapons:
-		weapon.connect("update_ammo", UI, "update_ammo")
+		weapon.connect("ammo_changed", Callable(UI, "update_ammo"))
 		weapon.hide()
 		weapon_unlocked.append(false)
 	weapon_unlocked[0] = true
@@ -34,7 +34,7 @@ func _ready():
 	UI.update_money(money)
 
 func _process(_delta):
-	if dead:
+	if is_dead:
 		return
 	
 	if Input.is_action_just_pressed("shop"):
@@ -43,8 +43,10 @@ func _process(_delta):
 	if in_shop:
 		return
 	
-	var vel = WALK_SPEED * Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	vel = move_and_slide(vel)
+	var vel = WALK_SPEED * Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	set_velocity(vel)
+	move_and_slide()
+	vel = velocity
 	position.x = clamp(position.x, 0, ROOM_WIDTH)
 	position.y = clamp(position.y, 0, ROOM_HEIGHT)
 	
@@ -94,7 +96,7 @@ func get_hit(other):
 	UI.update_hp(hp, max_hp)
 
 func lose():
-	dead = true
+	is_dead = true
 	UI.player_dead()
 	ActiveWeapon.stop()
 

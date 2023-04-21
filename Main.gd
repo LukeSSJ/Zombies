@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var ZombieTypes = [
+@onready var ZombieTypes = [
 	[preload("res://zombie/Zombie.tscn")],
 	[preload("res://zombie/FastZombie.tscn"), preload("res://zombie/ArmouredZombie.tscn")],
 	[preload("res://zombie/ExplosiveZombie.tscn"), preload("res://zombie/BufferZombie.tscn")],
@@ -8,17 +8,16 @@ onready var ZombieTypes = [
 	[preload("res://zombie/Tank.tscn")],
 ]
 
-onready var Spawns = $Spawns
-onready var TimerSpawn = $TimerSpawn
-onready var TimerNextWave = $TimerNextWave
+@onready var Spawns = $Spawns
+@onready var TimerSpawn = $TimerSpawn
+@onready var TimerNextWave = $TimerNextWave
 
-onready var Wave = $UI/Wave
-onready var WaveNumber = $UI/Wave/HBoxContainer/Label2
-onready var GameOver = $UI/GameOver
-onready var YouSurvived = $UI/GameOver/Content/VBoxContainer/YouSurvived
-onready var TotalKills = $UI/GameOver/Content/VBoxContainer/TotalKills
-onready var Retry = $UI/GameOver/Content/VBoxContainer/Retry
-onready var AP = $AP
+@onready var Wave = $UI/Wave
+@onready var WaveNumber = $UI/Wave/HBoxContainer/Label2
+@onready var GameOver = $UI/GameOver
+@onready var YouSurvived = $UI/GameOver/Content/VBoxContainer/YouSurvived
+@onready var TotalKills = $UI/GameOver/Content/VBoxContainer/TotalKills
+@onready var AP = $AP
 
 var wave = 0
 var kills = 0
@@ -26,6 +25,7 @@ var active = true
 var zombies_to_spawn = 0
 var zombies_left = 0
 var zombie_type_left = [INF, 0, 0, 0, 0]
+
 var zombie_type_rate = [0, 4, 4, 9, 19]
 
 func _ready():
@@ -34,11 +34,11 @@ func _ready():
 	Global.base = $Base
 	Global.can_pause = true
 	
-	Global.player.connect("dead", self, "game_over")
-	Global.base.connect("dead", self, "game_over")
-	TimerSpawn.connect("timeout", self, "spawn_zombie")
-	TimerNextWave.connect("timeout", self, "next_wave")
-	Retry.connect("pressed", self, "retry")
+	Global.player.connect("dead", Callable(self, "game_over"))
+	Global.base.connect("dead", Callable(self, "game_over"))
+	TimerSpawn.connect("timeout", Callable(self, "spawn_zombie"))
+	TimerNextWave.connect("timeout", Callable(self, "next_wave"))
+	GameOver.connect("confirmed", Callable(self, "retry"))
 	
 	randomize()
 	TimerNextWave.start(1)
@@ -58,7 +58,7 @@ func next_wave():
 	if wave >= 4:
 		zombie_type_left[3] = wave
 	if wave >= 5:
-		zombie_type_left[4] = ceil(wave / 5)
+		zombie_type_left[4] = ceil(wave / 5.0)
 	WaveNumber.text = str(wave)
 
 	TimerSpawn.start()
@@ -96,7 +96,7 @@ func game_over():
 	active = false
 	YouSurvived.text = "You survived to wave " + str(wave)
 	TotalKills.text = "Total Kills: " + str(kills)
-	GameOver.show()
+	GameOver.popup_centered()
 	Global.player.lose()
 
 func retry():

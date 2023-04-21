@@ -1,27 +1,27 @@
 extends Node2D
 
-signal update_ammo
+signal ammo_changed
 
-export var weapon_name = "WEAPON"
-export var max_ammo = 12
-export var is_full_auto = false
-export var damage = 40
-export var shotgun = false
-export (PackedScene) var Bullet
+@export var weapon_name = "WEAPON"
+@export var max_ammo = 12
+@export var is_full_auto = false
+@export var damage = 40
+@export var shotgun = false
+@export var Bullet: PackedScene
 
-onready var MuzzleFlash = $MuzzleFlash
-onready var PointShoot = $PointShoot
-onready var TimerShoot = $TimerShoot
-onready var TimerFlash = $TimerFlash
-onready var AP = $AP
-onready var Gunshot = $Gunshot
+@onready var MuzzleFlash = $MuzzleFlash
+@onready var PointShoot = $PointShoot
+@onready var TimerShoot = $TimerShoot
+@onready var TimerFlash = $TimerFlash
+@onready var AP = $AP
+@onready var Gunshot = $Gunshot
 
 var ammo
 var can_shoot = true
 var reloading = false
 
 func _ready():
-	TimerShoot.connect("timeout", self, "can_shoot_again")
+	TimerShoot.connect("timeout", Callable(self, "can_shoot_again"))
 	ammo = max_ammo
 	MuzzleFlash.hide()
 
@@ -31,7 +31,7 @@ func set_active():
 		reload()
 
 func update_ammo():
-	emit_signal("update_ammo", ammo, max_ammo)
+	emit_signal("ammo_changed", ammo, max_ammo)
 
 func fire_single():
 	if not is_full_auto:
@@ -63,7 +63,7 @@ func shoot():
 		reload()
 
 func create_bullet(add_deg=0):
-	var bullet = Bullet.instance()
+	var bullet = Bullet.instantiate()
 	bullet.position = PointShoot.global_position
 	bullet.rotation = global_rotation
 	bullet.rotation_degrees += add_deg

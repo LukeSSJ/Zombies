@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://zombie/Zombie.tscn" type="PackedScene" id=1]
-[ext_resource path="res://zombie/fast_zombie.png" type="Texture" id=2]
+[ext_resource path="res://zombie/fast_zombie.png" type="Texture2D" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 14.0
@@ -12,7 +12,7 @@ WALK_SPEED = 140
 damage = 20
 money_gained = 30
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite2D" parent="." index="0"]
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
